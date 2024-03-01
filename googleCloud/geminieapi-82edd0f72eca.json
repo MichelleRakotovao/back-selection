@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "geminieapi",
+  "private_key_id": "82edd0f72ecaefceebc52112a4b90994da5f212d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDDvDydw1G4LWyG\nLb3qZAf9tKbt2ZOY1mTp9ZA1bJ0V4RDOTSlX1v+EdCKe0GGLn3Eyfy5L536wMkN4\nw3jngDKhHIqBPICOmBZ1+Qp1WxW7wE7srdxJnbz2Mml16/AATHSba2SIrNBmIMuk\nVfm01M54yyp9UV0ucIHLzPlKHJ2xdQFIk4zBGhtzNxz13i5UCcwNESXTrPky6iwL\nTS/wZNAtFtawf6QU6rbX8tj2atsZ56YetfrhP3+qyYuiVFpl4F91Ce6qHBclaEzY\nqmjpco7KvaD+9bAKHdOmCiOOPYYuT46aHXcu2dKxYTq/uykahu0m9lMaUJvgyUQM\ngATi4uw5AgMBAAECggEAA+BL66yNBz0wYNMyEhy2AyJbNerw9H4LvzhY3pNOjxAx\nxtbErVPOzpQwL/3yGJOT6HXtTZ0sJ0LE5EosBZrxJbtMy4oOWlniWVFmZsmNe3Yv\npJnoJWBleBNVKaZ+TmXf30i3/nQ8UkbEUaD5kh5ZZ7n6QZi6uYCKiXsp1VEOFxAF\nubrvVHFBW0B0mujE2AatNyUv+A50fp9yF1w2YGkBXAn4UJwGqzcACoBX4WB8es3Y\neH4zvrKZwQszytIA1oFajCziYGSPn54gGYGj/KaFQKj4O94FXgIfr5QGii1s4KZC\noKQgSt/IjhaCkhJcJBI9AEsbBOWvj1eluJKHTlt54wKBgQDwGwHlYmmPof8KchDX\nAEFNTATNttO4rKDonxrY0xEk09inZzu5OGI3kkIbOHAjAC3cArn9oOXX27wKj+ga\ndQvjKFOmWynkM750xybDXDxYH1tKHn0iLTSfu1LphSQKTXI4xgkXu70RjfomVFSb\nmK8aF7469FwfhR+zFmsbmVlbawKBgQDQsU0yD+dSvozR+XRt4yX6TT9o7fvC06+5\n8Ytzj3XW3eVAwptHKSHXxbJgGklima2SSTgz6O6wU/F+b/5RAFedXdIVsQaDQYjC\n77ye87crbGJT0ZgJCnpXg4tQnRxujJP3/SgUCJ0+v1FAjhCbjvvwrIGj92VjVZr1\nBfGxY41D6wKBgQDfI5pNfXow/BIzuPIhfaEyntVQAPseg4A+765Zlz41hZOxb+U3\nK0lL7+bzuS2tuXrlHruPFDrGsvU8s6S3AdP8Vfv3fH2gEN6NVI+Xu15xXyLN7SvJ\n2U0wrTxOvWdTE8p1LMZCgj0h1VqGyJSgzfLdQveNfo8m0+cz3j/INGmw5QKBgEBv\nbgFWDbtroDk4x20iZFh7P2fbiw9lou1Lmh4NHnpAOweazqzTE2L25JNtqljqUEBJ\noTPN6NzCnl7Gn4RNEcBB9prB9NvUATEHKnr9jwG2TknI/iNUe9/Het1iFSRA/XLl\nVFmTK1Hzalf/RTtyk3GFIeYJfeGEzfp3Yl+9+CEPAoGBAKKOwPwhQ9vRVblvgr50\nYQJ6Vp3IV2M4GBPMdANo8hlvQpD2ZwyFGdD2zWnprEAXGOsGQIMbsavUgHo9XAeo\n/rNo7vA1CPROrk58tTd0H6cjOlWjPltedRuN/Dkoj8jhMMg4h6Ofm3iHZH0aXyKr\nOdU2db1BNjIDbAF4aS+mlneo\n-----END PRIVATE KEY-----\n",
+  "client_email": "form-parser-account@geminieapi.iam.gserviceaccount.com",
+  "client_id": "101510626108096553213",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/form-parser-account%40geminieapi.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
