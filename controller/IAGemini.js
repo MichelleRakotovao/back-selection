@@ -121,10 +121,10 @@ const IA_Generate_input_text_respos_text_2 = async (req, res) => {
         const generateEnergyDetails = async (energyChoices) => {
             const model = genAI.getGenerativeModel({ model: "gemini-pro" });
             const details = [];
-
+            let prix ;
             // Boucle pour obtenir les détails pour chaque choix d'énergie
             for (const choice of energyChoices) {
-                const detailPrompt = text_input_combined + "Décrivez brievement le projet sur " + choice + "et estimer le cout de consomation en un ans  "; // Créer le prompt pour chaque choix
+                const detailPrompt = text_input_combined + "Décrivez brievement le projet sur " + choice + "et estimer le cout de consomation en un mois  "; // Créer le prompt pour chaque choix
                 const detailResult = await model.generateContent(detailPrompt);
                 const detailResponse = await detailResult.response;
                 const detailText = detailResponse.text();
