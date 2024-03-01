@@ -92,9 +92,89 @@ async function extractKeywords(text_input) {
     return keywords;
 }
 
+/*------------------------------------- */
+/*const IA_Generate_input_text_respos_text_2 = async (req, res)=> {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const text_input = req.body.text_input; // Supposons que le texte provienne du corps de la requête
+    const result = await model.generateContent(text_input);
+    const response = await result.response;
+    const text = response.text();
+   // const words = text.split(" ");
+    res.status(200).json({ words: text });
+};*/
+function parseInput (){
+
+}
+
+const IA_Generate_input_text_respos_text_2 = async (req, res) => {
+    try {
+        //const text_input = req.body.text_input;
+        const text_input = "Entre ces sources d'énergie: biogaz , panneau ,solaire éolienne ,quels sont les choix de meilleures sources d'énergie pour alimenter ";
+        const description = req.body.description;
+        const descriptionsArray = description.map(item => item.trim());
+        const text_input_combined = `${text_input} ${descriptionsArray.join(', ')}. Donne juste les choix, sans aucune description.`;
+
+       // console.log(text_input_combined);
+
+
+        // Fonction pour générer les détails pour chaque choix d'énergie
+        const generateEnergyDetails = async (energyChoices) => {
+            const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+            const details = [];
+
+            // Boucle pour obtenir les détails pour chaque choix d'énergie
+            for (const choice of energyChoices) {
+                const detailPrompt = text_input_combined + "Décrivez brievement le projet sur " + choice + "et estimer le cout de consomation en un ans  "; // Créer le prompt pour chaque choix
+                const detailResult = await model.generateContent(detailPrompt);
+                const detailResponse = await detailResult.response;
+                const detailText = detailResponse.text();
+                details.push({ [choice]: detailText }); // Stocker les détails dans un tableau
+            }
+
+            return details;
+        };
+
+        // Générer les choix d'énergie initiaux
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const prompt = text_input_combined;
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        const energyChoices = text.split("\n"); // Stocker les choix d'énergie dans un tableau
+
+        // Générer les détails pour chaque choix d'énergie
+        const details = await generateEnergyDetails(energyChoices);
+
+        // Envoyer la réponse avec les détails
+       res.status(200).json({ energyChoices: energyChoices, details: details });
+       // res.status(200).json({ energyChoices: energyChoices/*, details: details */});
+        console.log(details)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Une erreur s'est produite lors du traitement de la requête." });
+    }
+};
+
+// Exemple d'utilisation
+//const text_input = "décrire les détails"; // Texte d'entrée supplémentaire
+/*IA_Generate_input_text_respos_text(text_input)
+    .then(details => {
+        console.log(details);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+*/
+
+
+
+/*------------------------------------- */
+
 
 module.exports={
     IA_Generate_input_text_image_respo_text,
     IA_Generate_input_text_respos_text,
-    searchYouTube
+    searchYouTube ,
+    IA_Generate_input_text_respos_text_2
 }
+
