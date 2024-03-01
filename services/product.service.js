@@ -12,9 +12,9 @@ class ProductsService {
                 description: description
             })
             await newProduct.save()
-            return ResponseFormat(200, 'SUCCESS', { newProduct }, "Product successfully added!")
+            return new ResponseFormat(200, 'SUCCESS', { newProduct }, "Product successfully added!")
         }
-        return ResponseFormat(403, 'ERROR', { error: "Product already exist!" }, "Product already exist!")
+        return new ResponseFormat(403, 'ERROR', { error: "Product already exist!" }, "Product already exist!")
     }
     async modifyProduct(productName, newName, newLocation, newCategory, newDescription, newQuantity) {
         try {
@@ -32,30 +32,31 @@ class ProductsService {
                 { new: true }
             )
             if (existProduct) {
-                return ResponseFormat(200, 'SUCCESS', { existProduct }, "Product successfully modified!")
+                return new ResponseFormat(200, 'SUCCESS', { existProduct }, "Product successfully modified!")
             }
-            return ResponseFormat(404, 'FAILURE', { error: "Product not found!" }, "Product not found!")
+            return new ResponseFormat(404, 'FAILURE', { error: "Product not found!" }, "Product not found!")
         } catch (error) {
-            return ResponseFormat(500, 'ERROR', { error: error.message }, "Erreur")
+            return new ResponseFormat(500, 'ERROR', { error: error.message }, "Erreur")
         }
     }
     async deleteProduct(productName) {
         try {
             const productToDelete = await productsModel.findOneAndDelete({ name: productName })
             if (!productToDelete) {
-                return ResponseFormat(404, 'FAILURE', { error: "Product not found!" }, "Product not found!")
+                return new ResponseFormat(404, 'FAILURE', { error: "Product not found!" }, "Product not found!")
             }
-            return ResponseFormat(200, 'SUCCESS', { productToDelete }, "Product successfully deleted!")
+            return new ResponseFormat(200, 'SUCCESS', { productToDelete }, "Product successfully deleted!")
         } catch (error) {
-            return ResponseFormat(500, 'FAILURE', { error: error.message }, "Product not found!")
+            return new ResponseFormat(500, 'FAILURE', { error: error.message }, "Product not found!")
         }
     }
     async getOneProduct(productName) {
         const product = await productsModel.findOne({ name: productName })
         if (product) {
-            return ResponseFormat(200, 'SUCCESS', { product }, "Produits réccupérés");
-        } else
-            return product
+            return new ResponseFormat(200, 'SUCCESS', { product }, "Produit trouvé");
+        } else {
+            return new ResponseFormat(404, 'FAILURE', {}, "Ce produit n'existe pas");
+        }
     }
     async getAllProducts() {
         const products = await productsModel.find()

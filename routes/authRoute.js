@@ -14,6 +14,4 @@ router.put("/edit_user", authMidlleware, updateauser);
 router.put("/block_user/:id", authMidlleware, isAdmin, blockUser);
 router.put("/unblock_user/:id", authMidlleware, isAdmin, unblockUser);
 
-const productController = new ProductController()
-router.post("/addProduct", (req, res) => productController.addProduct(req, res))
 module.exports = router

@@ -11,11 +11,11 @@ class ProductController {
                 const data = await productService.addProduct(name, location, quantity, category, description)
                 res.status(data.code).send(data)
             } catch (err) {
-                res.status(500).json({ error: err })
+                res.status(500).send(new ResponseFormat(500, "FAILURE", { err: err.message }, "Erreur serveur"))
             }
         }
         else {
-            res.status(401).json({ error: "Veuillez remplir tous les champs" })
+            res.status(401).send(new ResponseFormat(401, "FAILURE", { err: err.message }, "Veuillez remplir tous les champs"))
         }
     }
     async modifyProduct(req, res) {
@@ -25,11 +25,14 @@ class ProductController {
                 productName = productName.toLowerCase()
                 newName = newName.toLowerCase()
                 newCategory = newCategory.toLowerCase()
-                newQuantity = newQuantity.toLowerCase()
                 const data = await productService.modifyProduct(productName, newName, newLocation, newCategory, newDescription, newQuantity)
-                res.status(data.code).send(data)
+                if (data) {
+                    res.status(200).send(new ResponseFormat(200, "SUCCESS", {}, "product successfully updated"));
+                } else {
+                    res.status(403).send(new ResponseFormat(403, "FAILURE", {}, "Erreur lors de la modification"))
+                }
             } catch (err) {
-                res.status(500).json({ error: err })
+                res.status(500).send(new ResponseFormat(500, "FAILURE", { err: err.message }, "Erreur serveur"))
             }
         }
     }
@@ -41,7 +44,7 @@ class ProductController {
                 const data = await productService.deleteProduct(productName)
                 res.status(data.code).send(data)
             } catch (err) {
-                res.status(500).json({ error: err })
+                res.send(new ResponseFormat(500, "FAILURE", { err: err.message }, "Erreur serveur"))
             }
         }
     }
@@ -52,13 +55,13 @@ class ProductController {
             try {
                 const product = await productService.getOneProduct(productName)
                 if (product) {
-                    res.send(product)
+                    res.status(200).send(new ResponseFormat(200, "SUCCESS", { product }, "Produit trouvé"))
                 }
             } catch (e) {
-                res.status(500).json({ e: e.message })
+                res.status(500).send(new ResponseFormat(500, "FAILURE", { err: e.message }, "Erreur serveur"))
             }
         } else {
-            res.status(401).json({ error: "Veuillez remplir les champs" })
+            res.status(404).send(new ResponseFormat(401, "FAILURE", {}, `ce produit n'existe pas`))
         }
     }
     async getAllProducts(req, res) {
