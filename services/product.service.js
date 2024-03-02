@@ -1,7 +1,7 @@
 const productsModel = require("../models/product.model.js")
 const ResponseFormat = require("../utils/response.js")
 class ProductsService {
-    async addProduct(name, location, quantity, category, description) {
+    async addProduct(name, location, quantity, category, description, imageUrl) {
         const existProduct = await productsModel.findOne({ name: name })
         if (!existProduct) {
             const newProduct = await new productsModel({
@@ -9,7 +9,8 @@ class ProductsService {
                 location: location,
                 quantity: quantity,
                 category: category,
-                description: description
+                description: description,
+                imageUrl: imageUrl
             })
             await newProduct.save()
             return new ResponseFormat(200, 'SUCCESS', { newProduct }, "Product successfully added!")

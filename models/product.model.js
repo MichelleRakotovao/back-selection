@@ -21,7 +21,11 @@ const ProductModel = mongoose.model("Product", new Schema({
     category: {
         type: String,
         required: true,
+    },
+    imageUrl: {
+        type: String,
+        required: false
     }
-}));
+}))
 
 module.exports = ProductModel;
