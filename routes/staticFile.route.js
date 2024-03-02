@@ -1,0 +1,9 @@
+const Router = require("express")
+const multerConfig = require("../config/multer.js")
+const UploadController = require("../controller/staticFile.controller.js")
+const productController = require("../controller/product.controller.js")
+const ProductController = new productController()
+const router = Router()
+//router.post("/upload", multerConfig.array("images", Number.POSITIVE_INFINITY), (req, res) => UploadController(req, res))
+router.post("/upload", multerConfig.array("images", Number.POSITIVE_INFINITY), (req, res) => ProductController.addProduct(req, res));
+module.exports = router

@@ -25,7 +25,8 @@ app.use(cookieParser());
 app.use('/api/user', authRouter)
 app.use('/api/ia', IARouter)
 app.use('/product', ProductRouter)
-
+const staticFile = require("./routes/staticFile.route.js")
+app.use('/file', staticFile)
 app.use(errorHnadler)
 app.use(notFond)
 //const server = https.createServer(options, app);

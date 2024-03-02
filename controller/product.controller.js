@@ -4,11 +4,12 @@ const productService = new ProductService()
 class ProductController {
     async addProduct(req, res) {
         let { name, location, quantity, category, description } = req.body
+        const imageUrl = req.files[0].path;
         if (name && location && quantity && category) {
             try {
                 name = name.toLowerCase()
                 category = category.toLowerCase()
-                const data = await productService.addProduct(name, location, quantity, category, description)
+                const data = await productService.addProduct(name, location, quantity, category, description, imageUrl)
                 res.status(data.code).send(data)
             } catch (err) {
                 res.status(500).send(new ResponseFormat(500, "FAILURE", { err: err.message }, "Erreur serveur"))
