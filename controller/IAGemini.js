@@ -108,6 +108,9 @@ function parseInput (){
 
 const IA_Generate_input_text_respos_text_2 = async (req, res) => {
     try {
+        if (!navigator.onLine) {
+            throw new Error("Pas de connexion Internet.");
+        }
         //const text_input = req.body.text_input;
         //console.log(req.body.description);
         const text_input = "Entre ces sources d'énergie: biogaz , panneau ,solaire éolienne ,quels sont les choix de meilleures sources d'énergie pour alimenter ";
