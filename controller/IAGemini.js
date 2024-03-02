@@ -109,6 +109,7 @@ function parseInput (){
 const IA_Generate_input_text_respos_text_2 = async (req, res) => {
     try {
         //const text_input = req.body.text_input;
+        //console.log(req.body.description);
         const text_input = "Entre ces sources d'énergie: biogaz , panneau ,solaire éolienne ,quels sont les choix de meilleures sources d'énergie pour alimenter ";
         const description = req.body.description;
         const descriptionsArray = description.map(item => item.trim());
@@ -118,22 +119,23 @@ const IA_Generate_input_text_respos_text_2 = async (req, res) => {
 
 
         // Fonction pour générer les détails pour chaque choix d'énergie
-        const generateEnergyDetails = async (energyChoices) => {
+        const generateEnergyDetails = async (energyChoices, kWhPrice, ariaryPrice) => {
             const model = genAI.getGenerativeModel({ model: "gemini-pro" });
             const details = [];
-            let prix ;
+        
             // Boucle pour obtenir les détails pour chaque choix d'énergie
             for (const choice of energyChoices) {
-                const detailPrompt = text_input_combined + "Décrivez brievement le projet sur " + choice + "et estimer le cout de consomation en un mois  "; // Créer le prompt pour chaque choix
+                const detailPrompt = `Parmi ces sources d'énergie: ${energyChoices.join(', ')}, quelles sont les meilleures options pour alimenter ${choice}? Décrivez brièvement le projet sur ${choice} et estimez le coût de consommation en un mois. Notez que le prix moyen du kWh dans votre région est de ${kWhPrice} euros et le prix en ariary est de ${ariaryPrice} ariary et comment reamiser le projet avec les materielles et prix.`;
                 const detailResult = await model.generateContent(detailPrompt);
                 const detailResponse = await detailResult.response;
                 const detailText = detailResponse.text();
                 details.push({ [choice]: detailText }); // Stocker les détails dans un tableau
             }
-
+        
             return details;
         };
-
+        
+        const energyChoice = ["biogaz", "panneau solaire", "éolienne"];
         // Générer les choix d'énergie initiaux
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
         const prompt = text_input_combined;
@@ -143,7 +145,11 @@ const IA_Generate_input_text_respos_text_2 = async (req, res) => {
         const energyChoices = text.split("\n"); // Stocker les choix d'énergie dans un tableau
 
         // Générer les détails pour chaque choix d'énergie
-        const details = await generateEnergyDetails(energyChoices);
+        const kWhPrice = 0.15; // Exemple de prix moyen du kWh en euros
+        const ariaryPrice = 5000; // Exemple de prix en ariary
+
+        const details = await generateEnergyDetails(energyChoices, kWhPrice, ariaryPrice);
+
 
         // Envoyer la réponse avec les détails
        res.status(200).json({ energyChoices: energyChoices, details: details });

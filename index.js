@@ -20,9 +20,9 @@ const options = {
 dbConnection();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}))
-app.use(cors());
+//app.use(cors());
 app.use(cookieParser());
-
+app.use(cors({ origin: 'http://localhost:4200' }));
 app.use('/api/user' , authRouter )
 app.use('/api/ia' , IARouter )
 
